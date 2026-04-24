@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome Box</title>
+  <style>
+    /* Base reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #f093fb, #f5576c, #4facfe, #43e97b);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    #card {
+      background-color: #ffffff;
+      border-radius: 20px;
+      padding: 30px;
+      width: 350px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      transform: translateY(50px);
+      animation: slideUp 1.2s ease-out forwards;
+      border: 3px solid transparent;
+      transition: all 0.4s ease;
+    }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    #card:hover {
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      font-size: 26px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .detail {
+      font-size: 18px;
+      color: #555;
+      margin: 10px 0;
+    }
+
+    .quote {
+      font-size: 16px;
+      font-style: italic;
+      color: #777;
+      margin-top: 15px;
+    }
+
+    .emoji {
+      font-size: 36px;
+      margin-top: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="card">
+  <h2 id="greeting">Welcome!</h2>
+  <div class="detail" id="color"></div>
+  <div class="detail" id="mood"></div>
+  <div class="quote" id="quote"></div>
+  <div class="emoji" id="emoji">✨</div>
+</div>
+
+<script>
+  const name = prompt("👋 What's your name?");
+  const favColor = prompt("🎨 What's your favorite color?");
+  const mood = prompt("😄 What's your current mood or hobby?");
+  const quote = prompt("💬 Share a quote or message you love:");
+
+  document.getElementById("greeting").innerText = `Hello, ${name}!`;
+  document.getElementById("color").innerText = `🎨 Favorite Color: ${favColor}`;
+  document.getElementById("mood").innerText = `💖 Mood/Hobby: ${mood}`;
+  document.getElementById("quote").innerText = `“${quote || "The only way to do great work is to love what you do."}”`;
+
+  // Apply mood-based emoji
+  function getEmoji(text) {
+    const mood = text.toLowerCase();
+    if (mood.includes("happy")) return "😄";
+    if (mood.includes("sad")) return "😢";
+    if (mood.includes("sleep")) return "😴";
+    if (mood.includes("angry")) return "😠";
+    if (mood.includes("music")) return "🎵";
+    if (mood.includes("travel")) return "✈️";
+    if (mood.includes("gaming")) return "🎮";
+    if (mood.includes("read")) return "📖";
+    return "🌟";
+  }
+
+  document.getElementById("emoji").innerText = getEmoji(mood);
+  document.getElementById("card").style.border = `3px solid ${favColor}`;
+</script>
+
+</body>
+</html>
